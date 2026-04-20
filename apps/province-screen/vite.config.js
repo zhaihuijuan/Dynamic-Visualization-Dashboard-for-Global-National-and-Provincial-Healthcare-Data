@@ -1,5 +1,9 @@
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   base: './',
@@ -8,8 +12,10 @@ export default defineConfig({
     host: true,
     port: 5174,
     strictPort: true,
-    // 不要自动打开浏览器，避免 dev:all 时首屏跳到省份页；全球大屏在 bigbig_screen 里 open
-    open: false
+    open: false,
+    fs: {
+      allow: [__dirname, path.resolve(__dirname, '..')]
+    }
   },
   preview: {
     host: true,
